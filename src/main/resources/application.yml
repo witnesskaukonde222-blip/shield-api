@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: shield-api
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/shield_db?sslmode=disable}
+    username: ${SPRING_DATASOURCE_USERNAME:shield_admin}
+    password: ${SPRING_DATASOURCE_PASSWORD:change_me_in_env_file}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate   # Schema is owned by schema.sql / migrations, not Hibernate auto-DDL.
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:localhost}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+
+server:
+  port: 8080
+
+rsa:
+  public-key: classpath:keys/public.pem
+  private-key: classpath:keys/private_key.pem
+
+shield:
+  audit:
+    secret: ${SHIELD_AUDIT_SECRET:CHANGE_ME_IN_PRODUCTION}
+  fiscal-gateway:
+    url: ${SHIELD_FISCAL_GATEWAY_URL:https://api.gateway.mock.gov.zw/v1/fiscalise}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  level:
+    root: INFO
+    com.enterprise.shield: DEBUG

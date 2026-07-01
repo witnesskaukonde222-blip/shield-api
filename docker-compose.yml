@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  secure-backend-api:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-postgres:5432/shield_db
+      - SPRING_DATASOURCE_USERNAME=shield_admin
+      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD:-change_me_in_env_file}
+      - SPRING_DATA_REDIS_HOST=cache-redis
+      - SPRING_DATA_REDIS_PORT=6379
+      - SHIELD_AUDIT_SECRET=${SHIELD_AUDIT_SECRET:-change_me_in_env_file}
+    depends_on:
+      - db-postgres
+      - cache-redis
+    networks:
+      - enterprise-network
+
+  db-postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=shield_db
+      - POSTGRES_USER=shield_admin
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-change_me_in_env_file}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - enterprise-network
+
+  cache-redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - enterprise-network
+
+networks:
+  enterprise-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
