@@ -5,6 +5,5 @@ COPY src ./src
 RUN mvn -q -DskipTests package
 
 FROM eclipse-temurin:17-jre-alpine
-VOLUME /tmp
 COPY --from=build /workspace/target/shield-api-1.0.0.jar app.jar
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
