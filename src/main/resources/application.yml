@@ -10,7 +10,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: validate   # Schema is owned by schema.sql / migrations, not Hibernate auto-DDL.
+      ddl-auto: validate
     open-in-view: false
     properties:
       hibernate:
