@@ -23,8 +23,8 @@ spring:
 
   data:
     redis:
-      host: ${SPRING_DATA_REDIS_HOST:localhost}
-      port: ${SPRING_DATA_REDIS_PORT:6379}
+       url: ${SPRING_DATA_REDIS_URL:redis://localhost:6379}
+
 
 server:
   port: 8080
