@@ -1,5 +1,8 @@
 # SecureShield API
 
+**Live API:** https://shield-api-production.up.railway.app
+
+A Spring Boot backend built around...
 A Spring Boot backend built around the security patterns that enterprise and government API audits actually check for — not just authentication, but tamper-evident logging, active threat response, and resilience under infrastructure failure.
 
 The scenario it's designed for: a fiscal reporting API that has to keep working during load-shedding, survive credential-stuffing attacks without exposing the real database, and produce audit logs that hold up in a compliance review.
