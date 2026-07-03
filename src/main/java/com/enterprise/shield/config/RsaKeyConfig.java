@@ -1,5 +1,6 @@
 package com.enterprise.shield.config;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,7 @@ public class RsaKeyConfig {
     private String privateKeyBase64;
 
     @Bean
+    @Primary
     public RsaKeyProperties rsaKeyProperties(
             @Value("${rsa.public-key:#{null}}") org.springframework.core.io.Resource publicKeyResource,
             @Value("${rsa.private-key:#{null}}") org.springframework.core.io.Resource privateKeyResource
