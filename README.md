@@ -1,6 +1,7 @@
 # SecureShield API
 
 **Live API:** https://shield-api-production.up.railway.app
+**Live Dashboard:** https://shield-dashboard-gamma.vercel.app
 
 A Spring Boot backend built around...
 A Spring Boot backend built around the security patterns that enterprise and government API audits actually check for — not just authentication, but tamper-evident logging, active threat response, and resilience under infrastructure failure.
